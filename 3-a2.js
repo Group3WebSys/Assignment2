@@ -1,25 +1,20 @@
-(function( $ ) {
- 
-    $.fn.showLinkLocation = function() {
- 
-        return this.filter( "a" ).append(function() {
-            return " (" + this.href + ")";
-        });
- 
-    };
- 
-}( jQuery ));
+$( document ).ready(function() {
+	//setUpGame
+	$( "span#randomcolor" ).html( getRandomColor());
+	
+});
 
-//Canvas manipulation
-var circle=document.getElementById("circle");
-var con=circle.getContext("2d");
+function getRandomColor() {
+	var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+	return color;
+}
 
-var fillColor="";
-//
-fillColor="red";
-//
-con.fillStyle=fillColor;
-con.beginPath();
-con.arc(75, 75, 60, 0, 2*Math.PI);
-con.stroke();
-con.fill();
+function convertDecToHex(var dec) {
+	var hex = dec.toString(16);
+	return hex;
+}
+
+function convertHexToDec(var hex) {
+	var dec = parseInt(hex,16);
+	return dec;
+}
