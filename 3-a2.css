@@ -1,6 +1,6 @@
 label{
 	display:block;
 }
-input[type="range"] {
-	width: 200px;
+form {
+	width: 400px;
 }
