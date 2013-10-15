@@ -1,0 +1,6 @@
+label{
+	display:block;
+}
+input[type="range"] {
+	width: 200px;
+}
