@@ -1,1 +1,2 @@
 http://www.w3schools.com/jquerymobile/jquerymobile_form_sliders.asp
+https://code.google.com/p/jquery-timer/ //Timer
