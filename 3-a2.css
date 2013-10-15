@@ -4,3 +4,7 @@ label{
 form {
 	width: 400px;
 }
+#circle {
+	background-color: transparent;
+	border: solid black;
+}
