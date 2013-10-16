@@ -16,7 +16,8 @@ Assignment 2
 	<body>
 		<section id="game">
 			<span id="randomcolor"></span>
-			<canvas id="circle" height="150" width="150"></canvas>
+			<canvas id="circle_real" height="150" width="150"></canvas>
+			<canvas id="circle_guess" height="150" width="150"></canvas>
 			<form method="post" action="">
 				<div data-role="fieldcontain">
 					<label for="points">Red:</label>
@@ -26,7 +27,7 @@ Assignment 2
 					<label for="points">Blue:</label>
 					<input type="range" name="blue" id="blue" value="100" min="0" max="255" />
 				</div>
-			<input type="submit" data-inline="true" value="Got it!">
+			<input id="submit" type="submit" data-inline="true" value="Got it!">
 			</form>
 		</section>
 	</body>
