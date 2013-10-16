@@ -4,13 +4,16 @@ $( document ).ready(function() {
 	$( "span#randomcolor" ).html( color_real);
 	placeCircle(color_real, "circle_real");
 
-	$("#submit").click(function(){
+	
+	$("#submit").click(function(e){
+		e.preventDefault();
 		var hex_red=convertDecToHex(parseInt($("#red").val()));
 		var hex_green=convertDecToHex(parseInt($("#green").val()));
 		var hex_blue=convertDecToHex(parseInt($("#blue").val()));
 		var color_guess=hex_red+hex_green+hex_blue;
 		placeCircle(color_guess, "circle_guess");
-		alert("Here's the resuilt: ");
+		readUserInput();
+		location.reload();
 	});
 });
 
@@ -46,9 +49,28 @@ function convertDecToHex(dec) {
 	return hex;
 }
 
-
 //hex should be a string
 function convertHexToDec(hex) {
 	var dec = parseInt(hex,16);
 	return dec;
+}
+
+function readUserInput(){
+	var result_msg="";
+	
+	result_msg="Answer:\n";
+	var answer=$("span#randomcolor").html().slice(1);
+	var red_answer=convertHexToDec(answer.substr(0,2));
+	var green_answer=convertHexToDec(answer.substr(2,2));
+	var blue_answer=convertHexToDec(answer.substr(4,2));
+	result_msg=result_msg+"red: "+red_answer+"\n";
+	result_msg=result_msg+"green: "+green_answer+"\n";
+	result_msg=result_msg+"blue: "+blue_answer+"\n";
+	
+	result_msg=result_msg+"Your guess:\n";
+	$("*").find("input[data-type='range']").each(function(){
+		var temp=$(this).attr("name")+": "+$(this).attr("value")+"\n";
+		result_msg=result_msg+temp;
+	});
+	alert(result_msg);
 }
