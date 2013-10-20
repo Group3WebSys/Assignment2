@@ -1,3 +1,4 @@
 http://www.w3schools.com/jquerymobile/jquerymobile_form_sliders.asp
 https://code.google.com/p/jquery-timer/ 
 http://api.jquery.com/
+http://www.sitepoint.com/creating-accurate-timers-in-javascript/
