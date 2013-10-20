@@ -3,9 +3,13 @@ $( document ).ready(function() {
 	var color_real=getRandomColor();
 	$( "span#randomcolor" ).html( color_real);
 	placeCircle(color_real, "circle_real");
-
+	$("#circle_guess").hide();
 	
-	$("#submit").click(function(e){
+	//Timer
+	var intervalObj=startTimer();
+	
+	//Click event handler for "Got It!" 
+	$("#submit_guess").click(function(e){
 		e.preventDefault();
 		var hex_red=convertDecToHex(parseInt($("#red").val()));
 		var hex_green=convertDecToHex(parseInt($("#green").val()));
@@ -13,15 +17,38 @@ $( document ).ready(function() {
 		var color_guess=hex_red+hex_green+hex_blue;
 		placeCircle(color_guess, "circle_guess");
 		readUserInput();
-		location.reload();
+		$("#circle_guess").show();
+		
+		stopTimer(intervalObj);
 	});
+	
+	//Click event handler for "Next!"
+	$("#submit_next").click(function(e){
+		e.preventDefault();
+		intervalObj=startTimer();
+	});
+	
+	//Converting the decimals on sliders to hexadecimals
+	$("#red, #green, #blue").on("change", function() {
+		var number = parseInt(this.value);
+	    if(this.id=="red"){
+	    	$("#red_hex").val(number.toString(16));
+	    }
+	    else if(this.id=="green"){
+	    	$("#green_hex").val(number.toString(16));
+	    }
+	    else{
+	    	$("#blue_hex").val(number.toString(16));
+	    }
+	});
+	
 });
 
 
 //Create plugin
 $.fn.hexed=function(settings)
 {
-	//set default settings
+	//set default settings, overwrites it
 	settings=$.extend({
 		diffculty: "5",
 		turns: "10"
@@ -73,4 +100,28 @@ function readUserInput(){
 		result_msg=result_msg+temp;
 	});
 	alert(result_msg);
+}
+
+function startTimer(){
+	var start=new Date().getTime();
+	var elapsed=0;
+	$("#timer").val(elapsed);
+	var intervalObj=window.setInterval(function(){
+		var output="";
+		var time=new Date().getTime()-start;
+		elapsed=Math.floor(time/100)/10;
+		if(elapsed==Math.floor(elapsed)){
+			output=elapsed.toString()+".0";
+		}
+		else{
+			output=elapsed.toString();
+		}
+		output+="s";
+		$("#timer").val(output);
+	},100);
+	return intervalObj;
+}
+
+function stopTimer(intervalObj){
+	window.clearInterval(intervalObj);
 }
