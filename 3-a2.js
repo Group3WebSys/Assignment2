@@ -5,6 +5,7 @@ $( document ).ready(function() {
 	$("#turns").val(turns);
 	$("#difficulty").val(difficulty);
 	var score = 0;
+	$("#score").val(score);
 	var turn = 1;
 	$("#turn").val(turn);
 	
@@ -43,6 +44,7 @@ $( document ).ready(function() {
 		
 			//Keep score
 		score += newScore(total_off, difficulty,  $("#timer").val());
+		$("#score").val(score);
 	});
 	
 	//Click event handler for "Next!"
