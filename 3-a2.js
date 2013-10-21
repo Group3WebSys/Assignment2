@@ -1,6 +1,9 @@
 $( document ).ready(function() {
 	
-	//setUpGame
+	var score = 0;
+	var turn = 1;
+	$("#turn").val(turn);
+	
 	var color_real=getRandomColor();
 	$( "span#randomcolor" ).html( color_real);
 	placeCircle(color_real, "circle_real");
@@ -36,8 +39,6 @@ $( document ).ready(function() {
 		stopTimer(intervalObj);
 		
 			//Keep score
-		if(turn == 1){
-			var score = 0;}
 		score += newScore(total_off, difficulty,  $("#timer").val());
 	});
 	
@@ -45,6 +46,8 @@ $( document ).ready(function() {
 	$("#submit_next").click(function(e){
 		e.preventDefault();
 		intervalObj=startTimer();
+		turn+=1;
+		$("#turn").val(turn);
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
