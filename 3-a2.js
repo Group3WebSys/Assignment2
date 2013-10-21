@@ -51,10 +51,14 @@ $( document ).ready(function() {
 		intervalObj=startTimer();
 		turn+=1;
 		if (turn > turns) {
-			// end game
+			alert("end game");
 		}
 		else {
 			$("#turn").val(turn);
+			color_real=getRandomColor();
+			$( "span#randomcolor" ).html( color_real);
+			placeCircle(color_real, "circle_real");
+			$("#circle_guess").hide();
 		}
 	});
 	
