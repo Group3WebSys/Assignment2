@@ -39,12 +39,12 @@ $( document ).ready(function() {
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
 		var total_off=per_red+per_green+per_blue;
-		total_off = total_off/3;
+		$("#t_off").val(total_off/3); //added this
 		
 		stopTimer(intervalObj);
 		
 		//Keep score
-		score += newScore(total_off, difficulty,  $("#timer").val());
+		score += newScore($("#t_off").val(), $("#difficulty").val(),  $("#timer").val());//changed this
 		$("#score").val(score);
 		
 		//Enable the Next! button
