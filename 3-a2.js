@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	
-	var difficulty = prompt("Please enter difficulty",5);
+	var difficulty = prompt("Please enter difficulty from 0 to 10",5);
 	var turns = prompt("Please enter number of turns",5);
 	$("#turns").val(turns);
 	$("#difficulty").val(difficulty);
