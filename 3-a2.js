@@ -63,6 +63,10 @@ $( document ).ready(function() {
 		turn+=1;
 		if (turn > turns) {
 			alert("end game");
+			//Hide all game widgets
+			$("#game").hide();
+			//Reset timer, scores, turns, difficulties...
+			
 		}
 		else {
 			$("#turn").val(turn);
@@ -75,6 +79,13 @@ $( document ).ready(function() {
 		$("#submit_next[type='submit']").button("disable");
 		//Enable the Got it! button
 		$("#submit_guess[type='submit']").button("enable");
+	});
+	
+	//Hide Play again!
+	$("#again[type='type='submit']").button("disable");
+	//Click event handler for "Play again!"
+	$("#again").click(function(e){
+		$("#game").show();
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
