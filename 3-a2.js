@@ -193,9 +193,9 @@ function percentOff(given, x){
 	diff = Math.abs(diff); //Absolute value of difference
 	var fin = diff / 255;
 	fin = fin*100;
-	$("#fin").val(fin);//add
 	
-	return $("#fin").val();//changed
+	
+	return fin;
 }
 
 function newScore(poff, lev, time){
@@ -211,7 +211,6 @@ function newScore(poff, lev, time){
 	if(s<0){
 		s=0;
 	}
-	$("#s").val(s);//added
 
-	return $("#s").val();//changed
+	return s;
 }
