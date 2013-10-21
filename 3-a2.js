@@ -18,6 +18,7 @@ $( document ).ready(function() {
 	
 	//Click event handler for "Got It!" 
 	$("#submit_guess").click(function(e){
+		
 		e.preventDefault();
 		var hex_red=convertDecToHex(parseInt($("#red").val()));
 		var hex_green=convertDecToHex(parseInt($("#green").val()));
@@ -43,8 +44,14 @@ $( document ).ready(function() {
 		
 			//Keep score
 		score += newScore(total_off, difficulty,  $("#timer").val());
+		//Enable the Next! button
+		$("#submit_next[type='submit']").button("enable");
+		//Disable the Got it! button
+		$("#submit_guess[type='submit']").button("disable");
 	});
 	
+	//Disable the Next! button
+	$("#submit_next[type='submit']").button("disable");
 	//Click event handler for "Next!"
 	$("#submit_next").click(function(e){
 		e.preventDefault();
@@ -56,6 +63,10 @@ $( document ).ready(function() {
 		else {
 			$("#turn").val(turn);
 		}
+		//Disable the Next! button
+		$("#submit_next[type='submit']").button("disable");
+		//Enable the Got it! button
+		$("#submit_guess[type='submit']").button("enable");
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
