@@ -198,11 +198,12 @@ function percentOff(given, x){
 }
 
 function newScore(poff, lev, time){
-	var s = 100;
+	var s = 15;
 	//Subtract for % off
 	s = s - poff;
 	//Difficulty component
-	s = s/(15-lev);
+	s = s - lev;
+	s= s/(15-lev);
 	//Dertermine time component of score
 	var pt = 15000 - time;
 	s = s*pt;
