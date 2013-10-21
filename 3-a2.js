@@ -1,5 +1,9 @@
 $( document ).ready(function() {
 	
+	var difficulty = prompt("Please enter difficulty",5);
+	var turns = prompt("Please enter number of turns",5);
+	$("#turns").val(turns);
+	$("#difficulty").val(difficulty);
 	var score = 0;
 	var turn = 1;
 	$("#turn").val(turn);
@@ -28,7 +32,6 @@ $( document ).ready(function() {
 		var given_red = parseInt(color_real.substring(0,2),16);
 		var given_green = parseInt(color_real.substring(3,5),16);
 		var given_blue = parseInt(color_real.substring(5),16);
-		alert(given_red);
 		
 		var per_red=percentOff(given_red, parseInt($("#red").val()));
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
@@ -47,7 +50,12 @@ $( document ).ready(function() {
 		e.preventDefault();
 		intervalObj=startTimer();
 		turn+=1;
-		$("#turn").val(turn);
+		if (turn > turns) {
+			// end game
+		}
+		else {
+			$("#turn").val(turn);
+		}
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
@@ -76,7 +84,6 @@ $.fn.hexed=function(settings)
 		diffculty: "5",
 		turns: "10"
 	}, settings);
-	
 }
 
 function placeCircle(color, circleID) {
