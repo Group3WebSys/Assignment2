@@ -1,10 +1,11 @@
 $( document ).ready(function() {
 	
-	var difficulty = prompt("Please enter difficulty",5);
+	var difficulty = prompt("Please enter difficulty from 0 to 10",5);
 	var turns = prompt("Please enter number of turns",5);
 	$("#turns").val(turns);
 	$("#difficulty").val(difficulty);
 	var score = 0;
+	$("#score").val(score);
 	var turn = 1;
 	$("#turn").val(turn);
 	
@@ -44,10 +45,13 @@ $( document ).ready(function() {
 		
 			//Keep score
 		score += newScore(total_off, difficulty,  $("#timer").val());
+		
 		//Enable the Next! button
 		$("#submit_next[type='submit']").button("enable");
 		//Disable the Got it! button
 		$("#submit_guess[type='submit']").button("disable");
+		
+		$("#score").val(score);
 	});
 	
 	//Disable the Next! button
@@ -58,10 +62,14 @@ $( document ).ready(function() {
 		intervalObj=startTimer();
 		turn+=1;
 		if (turn > turns) {
-			// end game
+			alert("end game");
 		}
 		else {
 			$("#turn").val(turn);
+			color_real=getRandomColor();
+			$( "span#randomcolor" ).html( color_real);
+			placeCircle(color_real, "circle_real");
+			$("#circle_guess").hide();
 		}
 		//Disable the Next! button
 		$("#submit_next[type='submit']").button("disable");
@@ -187,6 +195,9 @@ function newScore(poff, lev, time){
 	//Dertermine time component of score
 	var pt = 15000 - time;
 	s = s*pt;
+	if(s<0){
+		s=0;
+	}
 
 	return s;
 }
