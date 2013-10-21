@@ -39,7 +39,7 @@ $( document ).ready(function() {
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
 		var total_off=per_red+per_green+per_blue;
-		$("#t_off").val(total_off/3); //added this
+		$("#t_off").val(total_off); //added this
 		
 		stopTimer(intervalObj);
 		
@@ -193,8 +193,9 @@ function percentOff(given, x){
 	diff = Math.abs(diff); //Absolute value of difference
 	var fin = diff / 255;
 	fin = fin*100;
-
-	return fin;
+	$("#fin").val(fin);//add
+	
+	return $("#fin").val();//changed
 }
 
 function newScore(poff, lev, time){
@@ -210,6 +211,7 @@ function newScore(poff, lev, time){
 	if(s<0){
 		s=0;
 	}
+	$("#s").val(s);//added
 
-	return s;
+	return s;//changed
 }
