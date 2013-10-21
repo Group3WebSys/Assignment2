@@ -28,7 +28,7 @@ $( document ).ready(function() {
 		alert(given_red);
 		
 		var per_red=percentOff(given_red, parseInt($("#red").val()));
-		var per_green=percentOff(given_red, parseInt($"#green").val()));
+		var per_green=percentOff(given_green, parseInt($"#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($"#blue").val()));
 		var total_off=per_red+per_green+per+blue;
 		total_off = total_off/3;
