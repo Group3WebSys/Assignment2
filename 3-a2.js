@@ -83,8 +83,11 @@ $( document ).ready(function() {
 	//Hide Play again!
 	$("#again[type='type='submit']").button("disable");
 	//Click event handler for "Play again!"
-	$("#again").click(function(e){
-		$("#game").show();
+	//$("#again").click(function(e){
+	//	$("#game").show();
+	//});
+	$('#again').click(function(e) {
+    	location.reload();
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
