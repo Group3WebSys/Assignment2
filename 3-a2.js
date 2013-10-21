@@ -182,6 +182,9 @@ function newScore(poff, lev, time){
 	//Dertermine time component of score
 	var pt = 15000 - time;
 	s = s*pt;
+	if(s<0){
+		s=0;
+	}
 
 	return s;
 }
