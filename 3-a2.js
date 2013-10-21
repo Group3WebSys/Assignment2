@@ -39,8 +39,7 @@ $( document ).ready(function() {
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
 		var total_off=per_red+per_green+per_blue;
-		$("#t_off").val(total_off); //added this
-		
+
 		stopTimer(intervalObj);
 		
 		//Keep score
