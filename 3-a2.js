@@ -26,20 +26,19 @@ $( document ).ready(function() {
 		var given_green = parseInt(color_real.substring(3,5),16);
 		var given_blue = parseInt(color_real.substring(5),16);
 		alert(given_red);
-		/*
+		
 		var per_red=percentOff(given_red, parseInt($("#red").val()));
 		var per_green=percentOff(given_red, parseInt($"#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($"#blue").val()));
 		var total_off=per_red+per_green+per+blue;
 		total_off = total_off/3;
 		
-		//Keep score
+		stopTimer(intervalObj);
+		
+			//Keep score
 		if(turn == 1){
 			var score = 0;}
-		score += newScore(total_off, difficulty, intervalObj);
-		
-		stopTimer(intervalObj);
-		*/
+		score += newScore(total_off, difficulty,  $("#timer").val());
 	});
 	
 	//Click event handler for "Next!"
