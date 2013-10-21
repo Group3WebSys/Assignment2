@@ -213,5 +213,5 @@ function newScore(poff, lev, time){
 	}
 	$("#s").val(s);//added
 
-	return s;//changed
+	return $("#s").val();//changed
 }
