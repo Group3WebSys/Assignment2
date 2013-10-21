@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+	
 	//setUpGame
 	var color_real=getRandomColor();
 	$( "span#randomcolor" ).html( color_real);
@@ -18,6 +19,20 @@ $( document ).ready(function() {
 		placeCircle(color_guess, "circle_guess");
 		readUserInput();
 		$("#circle_guess").show();
+		
+		//Calculate score
+		//Determine Percent off
+		var per_red=percentOff(/*GIVEN RED VAL GOES HERE*/, paraInt($("#red").val()));
+		var per_green=percentOff(/*GIVEN GREEN VAL GOES HERE*/, paraInt($"#green").val()));
+		var per_blue=percentOff(/*GIVEN BLUE VAL GOES HERE*/, paraInt($"#blue").val()));
+		
+		var total_off=per_red+per_green+per+blue;
+		total_off = total_off/3;
+		
+		//Keep score
+		if(turn == 1){
+			var score = 0;}
+		score += newScore(total_off, difficulty, intervalObj);
 		
 		stopTimer(intervalObj);
 	});
@@ -41,6 +56,7 @@ $( document ).ready(function() {
 	    	$("#blue_hex").val(number.toString(16));
 	    }
 	});
+	
 	
 });
 
@@ -124,4 +140,27 @@ function startTimer(){
 
 function stopTimer(intervalObj){
 	window.clearInterval(intervalObj);
+}
+
+function percentOff(given, x){
+	var diff = given;
+	diff = diff - x;
+	diff = Math.abs(diff); //Absolute value of difference
+	var fin = diff / 255;
+	fin = fin*100;
+
+	return fin;
+}
+
+function newScore(poff, lev, time){
+	var s = 100;
+	//Subtract for % off
+	s = s - poff;
+	//Difficulty component
+	s = s/(15-lev);
+	//Dertermine time component of score
+	var pt = 15000 - time;
+	s = s*pt;
+
+	return s;
 }
