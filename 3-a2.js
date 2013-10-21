@@ -44,7 +44,7 @@ $( document ).ready(function() {
 		stopTimer(intervalObj);
 		
 		//Keep score
-		score += newScore($("#t_off").val(), $("#difficulty").val(),  $("#timer").val());//changed this
+		score += newScore(total_off, difficulty,  $("#timer").val());//changed this
 		$("#score").val(score);
 		
 		//Enable the Next! button
