@@ -19,13 +19,17 @@ $( document ).ready(function() {
 		placeCircle(color_guess, "circle_guess");
 		readUserInput();
 		$("#circle_guess").show();
-		
 		//Calculate score
 		//Determine Percent off
-		var per_red=percentOff(/*GIVEN RED VAL GOES HERE*/, paraInt($("#red").val()));
-		var per_green=percentOff(/*GIVEN GREEN VAL GOES HERE*/, paraInt($"#green").val()));
-		var per_blue=percentOff(/*GIVEN BLUE VAL GOES HERE*/, paraInt($"#blue").val()));
-		
+		color_real = color_real.toString().substring(1);
+		var given_red = parseInt(color_real.substring(0,2),16);
+		var given_green = parseInt(color_real.substring(3,5),16);
+		var given_blue = parseInt(color_real.substring(5),16);
+		alert(given_red);
+		/*
+		var per_red=percentOff(given_red, parseInt($("#red").val()));
+		var per_green=percentOff(given_red, parseInt($"#green").val()));
+		var per_blue=percentOff(given_blue, parseInt($"#blue").val()));
 		var total_off=per_red+per_green+per+blue;
 		total_off = total_off/3;
 		
@@ -35,6 +39,7 @@ $( document ).ready(function() {
 		score += newScore(total_off, difficulty, intervalObj);
 		
 		stopTimer(intervalObj);
+		*/
 	});
 	
 	//Click event handler for "Next!"
@@ -115,6 +120,7 @@ function readUserInput(){
 		var temp=$(this).attr("name")+": "+$(this).attr("value")+"\n";
 		result_msg=result_msg+temp;
 	});
+	
 	alert(result_msg);
 }
 
