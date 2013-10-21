@@ -43,15 +43,15 @@ $( document ).ready(function() {
 		
 		stopTimer(intervalObj);
 		
-			//Keep score
+		//Keep score
 		score += newScore(total_off, difficulty,  $("#timer").val());
+		$("#score").val(score);
 		
 		//Enable the Next! button
 		$("#submit_next[type='submit']").button("enable");
 		//Disable the Got it! button
 		$("#submit_guess[type='submit']").button("disable");
 		
-		$("#score").val(score);
 	});
 	
 	//Disable the Next! button
