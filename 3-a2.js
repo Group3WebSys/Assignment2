@@ -49,13 +49,12 @@ $( document ).ready(function() {
 		var per_red=percentOff(given_red, parseInt($("#red").val()));
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
-		var total_off=per_red+per_green+per_blue;
-
+		var total_off=(per_red+per_green+per_blue)/3.0;
 		stopTimer(intervalObj);
 		
 		//Keep score
-		score += newScore(total_off, difficulty,  $("#timer").val());//changed this
-		$("#score").val(score);
+		score += newScore(total_off, difficulty,  parseFloat($("#timer").val()));//changed this
+		$("#score").val(parseInt(score));
 		
 		//Enable the Next! button
 		$("#submit_next[type='submit']").button("enable");
@@ -213,31 +212,34 @@ function startTimer(){
 function stopTimer(intervalObj){
 	window.clearInterval(intervalObj);
 }
+function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
 
-function percentOff(given, x){
+function percentOff(given, actual){
 	var diff = given;
-	diff = diff - x;
+	diff = diff - actual;
 	diff = Math.abs(diff); //Absolute value of difference
 	var fin = diff / 255;
 	fin = fin*100;
-	
 	
 	return fin;
 }
 
 function newScore(poff, lev, time){
-	var s = 15;
-	//Subtract for % off
-	s = s - poff;
+	var s = 100;
 	//Difficulty component
 	s = s - lev;
+	//Subtract for % off
+	s = s - poff;
 	s= s/(15-lev);
 	//Dertermine time component of score
-	var pt = 15000 - time;
+	var milli = parseFloat(time) * 1000;
+	
+	var pt = 30000 - milli;
 	s = s*pt;
 	if(s<0){
 		s=0;
 	}
-
+	
 	return s;
 }
+
