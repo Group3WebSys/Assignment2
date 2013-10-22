@@ -39,7 +39,6 @@ $( document ).ready(function() {
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
 		var total_off=(per_red+per_green+per_blue)/3.0;
-		alert(total_off);
 		stopTimer(intervalObj);
 		
 		//Keep score
@@ -215,17 +214,16 @@ function percentOff(given, actual){
 }
 
 function newScore(poff, lev, time){
-	var numerator = 0;
-	var denominator = 0;
-	
 	var s = 15;
-	//Subtract for % off
-	s = s - poff;
 	//Difficulty component
 	s = s - lev;
+	//Subtract for % off
+	s = s - poff;
 	s= s/(15-lev);
 	//Dertermine time component of score
-	var pt = 15000 - time;
+	var milli = parseFloat(time) * 1000;
+	var pt = 15000 - milli;
+
 	s = s*pt;
 	alert(s);
 	if(s<0){
