@@ -43,7 +43,7 @@ $( document ).ready(function() {
 		
 		//Keep score
 		score += newScore(total_off, difficulty,  parseFloat($("#timer").val()));//changed this
-		$("#score").val(score);
+		$("#score").val(parseInt(score));
 		
 		//Enable the Next! button
 		$("#submit_next[type='submit']").button("enable");
@@ -214,7 +214,7 @@ function percentOff(given, actual){
 }
 
 function newScore(poff, lev, time){
-	var s = 15;
+	var s = 100;
 	//Difficulty component
 	s = s - lev;
 	//Subtract for % off
@@ -222,10 +222,9 @@ function newScore(poff, lev, time){
 	s= s/(15-lev);
 	//Dertermine time component of score
 	var milli = parseFloat(time) * 1000;
+	
 	var pt = 15000 - milli;
-
 	s = s*pt;
-	alert(s);
 	if(s<0){
 		s=0;
 	}
