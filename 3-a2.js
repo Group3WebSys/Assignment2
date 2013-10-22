@@ -39,19 +39,18 @@ $( document ).ready(function() {
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
 		var total_off=per_red+per_green+per_blue;
-		total_off = total_off/3;
-		
+
 		stopTimer(intervalObj);
 		
-			//Keep score
-		score += newScore(total_off, difficulty,  $("#timer").val());
+		//Keep score
+		score += newScore(total_off, difficulty,  $("#timer").val());//changed this
+		$("#score").val(score);
 		
 		//Enable the Next! button
 		$("#submit_next[type='submit']").button("enable");
 		//Disable the Got it! button
 		$("#submit_guess[type='submit']").button("disable");
 		
-		$("#score").val(score);
 	});
 	
 	//Disable the Next! button
@@ -92,12 +91,15 @@ $( document ).ready(function() {
 	//Hide Play again!
 	$("#post_game").hide();
 	//Click event handler for "Play again!"
-	$("#again").click(function(e){
+  /*$("#again").click(function(e){
 		$("#game").show();
 		difficulty = prompt("Please enter difficulty from 0 to 10",5);
 		turns = prompt("Please enter number of turns",5);
 		startTimer();
 		$("#post_game").hide();
+	});*/
+	$('#again').click(function(e) {
+    	location.reload();
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
@@ -205,16 +207,18 @@ function percentOff(given, x){
 	diff = Math.abs(diff); //Absolute value of difference
 	var fin = diff / 255;
 	fin = fin*100;
-
+	
+	
 	return fin;
 }
 
 function newScore(poff, lev, time){
-	var s = 100;
+	var s = 15;
 	//Subtract for % off
 	s = s - poff;
 	//Difficulty component
-	s = s/(15-lev);
+	s = s - lev;
+	s= s/(15-lev);
 	//Dertermine time component of score
 	var pt = 15000 - time;
 	s = s*pt;
