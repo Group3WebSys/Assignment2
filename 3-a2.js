@@ -43,7 +43,7 @@ $( document ).ready(function() {
 		stopTimer(intervalObj);
 		
 		//Keep score
-		score += newScore(total_off, difficulty,  $("#timer").val());//changed this
+		score += newScore(total_off, difficulty,  parseFloat($("#timer").val()));//changed this
 		$("#score").val(score);
 		
 		//Enable the Next! button
@@ -202,6 +202,7 @@ function startTimer(){
 function stopTimer(intervalObj){
 	window.clearInterval(intervalObj);
 }
+function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
 
 function percentOff(given, x){
 	var diff = given;
@@ -209,7 +210,6 @@ function percentOff(given, x){
 	diff = Math.abs(diff); //Absolute value of difference
 	var fin = diff / 255;
 	fin = fin*100;
-	
 	
 	return fin;
 }
@@ -230,3 +230,4 @@ function newScore(poff, lev, time){
 
 	return s;
 }
+
