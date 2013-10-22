@@ -21,7 +21,8 @@ $( document ).ready(function() {
         $("#turn").val(turn);
         
         var color_real=getRandomColor();
-        $( "span#randomcolor" ).html( color_real);
+        $( "span#randomcolor" ).html( color_real).hide();
+        
         placeCircle(color_real, "circle_real");
         $("#circle_guess").hide();
         
