@@ -65,8 +65,16 @@ $( document ).ready(function() {
 			alert("end game");
 			//Hide all game widgets
 			$("#game").hide();
-			//Reset timer, scores, turns, difficulties...
+			//Show Play again! button
+			$("#post_game").show();
+			//Analyze score
 			
+			//Reset timer, scores turns, difficulty...
+			stopTimer(intervalObj);
+			score=0;
+			turn=1;
+			difficulty = 5;
+			turns = 5;
 		}
 		else {
 			$("#turn").val(turn);
@@ -82,10 +90,14 @@ $( document ).ready(function() {
 	});
 	
 	//Hide Play again!
-	$("#again[type='type='submit']").button("disable");
+	$("#post_game").hide();
 	//Click event handler for "Play again!"
 	$("#again").click(function(e){
 		$("#game").show();
+		difficulty = prompt("Please enter difficulty from 0 to 10",5);
+		turns = prompt("Please enter number of turns",5);
+		startTimer();
+		$("#post_game").hide();
 	});
 	
 	//Converting the decimals on sliders to hexadecimals
