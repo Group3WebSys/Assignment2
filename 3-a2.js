@@ -1,3 +1,14 @@
+(function( $ ) {
+	$.fn.hexed = function(){
+		//Generate the tags
+		var html_str="<h1>Test</h1><ul><li>1</li><li>2</li><li>3</li></ul>";
+		this.html(html_str);
+		alert("hex ok");
+		return this;
+	};
+
+}( jQuery ));
+
 $( document ).ready(function() {
 	
 	var difficulty = prompt("Please enter difficulty from 0 to 10",5);
