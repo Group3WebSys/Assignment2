@@ -38,8 +38,8 @@ $( document ).ready(function() {
 		var per_red=percentOff(given_red, parseInt($("#red").val()));
 		var per_green=percentOff(given_green, parseInt($("#green").val()));
 		var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
-		var total_off=per_red+per_green+per_blue;
-
+		var total_off=(per_red+per_green+per_blue)/3.0;
+		alert(total_off);
 		stopTimer(intervalObj);
 		
 		//Keep score
@@ -204,9 +204,9 @@ function stopTimer(intervalObj){
 }
 function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
 
-function percentOff(given, x){
+function percentOff(given, actual){
 	var diff = given;
-	diff = diff - x;
+	diff = diff - actual;
 	diff = Math.abs(diff); //Absolute value of difference
 	var fin = diff / 255;
 	fin = fin*100;
@@ -215,6 +215,9 @@ function percentOff(given, x){
 }
 
 function newScore(poff, lev, time){
+	var numerator = 0;
+	var denominator = 0;
+	
 	var s = 15;
 	//Subtract for % off
 	s = s - poff;
@@ -224,10 +227,11 @@ function newScore(poff, lev, time){
 	//Dertermine time component of score
 	var pt = 15000 - time;
 	s = s*pt;
+	alert(s);
 	if(s<0){
 		s=0;
 	}
-
+	
 	return s;
 }
 
