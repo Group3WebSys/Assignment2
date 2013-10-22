@@ -223,7 +223,7 @@ function newScore(poff, lev, time){
 	//Dertermine time component of score
 	var milli = parseFloat(time) * 1000;
 	
-	var pt = 15000 - milli;
+	var pt = 30000 - milli;
 	s = s*pt;
 	if(s<0){
 		s=0;
