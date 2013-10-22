@@ -10,74 +10,83 @@
 }( jQuery ));
 
 $( document ).ready(function() {
-        
+        // Ask for user input for difficulty and number of turns
         var difficulty = prompt("Please enter difficulty from 0 to 10",5);
         var turns = prompt("Please enter number of turns",5);
         $("#turns").val(turns);
         $("#difficulty").val(difficulty);
+		
+		// initialize score and current turn variables
         var score = 0;
         $("#score").val(score);
         var turn = 1;
         $("#turn").val(turn);
         
+		// get random color and place circle onto game
         var color_real=getRandomColor();
         $( "span#randomcolor" ).html( color_real).hide();
-        
         placeCircle(color_real, "circle_real");
         $("#circle_guess").hide();
         
-        //Timer
+        // start timer
         var intervalObj=startTimer();
         
         //Click event handler for "Got It!" 
         $("#submit_guess").click(function(e){
                 
+				// get user input for colors
                 e.preventDefault();
                 var hex_red=convertDecToHex(parseInt($("#red").val()));
                 var hex_green=convertDecToHex(parseInt($("#green").val()));
                 var hex_blue=convertDecToHex(parseInt($("#blue").val()));
                 var color_guess=hex_red+hex_green+hex_blue;
                 placeCircle(color_guess, "circle_guess");
-                readUserInput();
                 $("#circle_guess").show();
+				
+				// display information about the current round
+				readUserInput();
                 //Calculate score
-                //Determine Percent off
+                
+				// convert to strings and integers respectively in order to allow for parsing
                 color_real = color_real.toString().substring(1);
                 var given_red = parseInt(color_real.substring(0,2),16);
                 var given_green = parseInt(color_real.substring(3,5),16);
                 var given_blue = parseInt(color_real.substring(5),16);
                 
+				// Determine Percent off
                 var per_red=percentOff(given_red, parseInt($("#red").val()));
                 var per_green=percentOff(given_green, parseInt($("#green").val()));
                 var per_blue=percentOff(given_blue, parseInt($("#blue").val()));
                 var total_off=(per_red+per_green+per_blue)/3.0;
+				
+				// stop timer for current round
                 stopTimer(intervalObj);
                 
-                //Keep score
+                // increment score
                 score += newScore(total_off, difficulty,  parseFloat($("#timer").val()));//changed this
                 $("#score").val(parseInt(score));
                 
-                //Enable the Next! button
+                // Enable the Next! button
                 $("#submit_next[type='submit']").button("enable");
-                //Disable the Got it! button
+                // Disable the Got it! button
                 $("#submit_guess[type='submit']").button("disable");
                 
         });
         
-        //Disable the Next! button
+        // Disable the Next! button
         $("#submit_next[type='submit']").button("disable");
-        //Click event handler for "Next!"
+        
+		//Click event handler for "Next!"
         $("#submit_next").click(function(e){
                 e.preventDefault();
                 intervalObj=startTimer();
                 turn+=1;
                 if (turn > turns) {
-                        alert("end game");
-                        //Hide all game widgets
+                        alert("Thanks for playing! Your score was: "+score+".");
+                        // Hide all game widgets
                         $("#game").hide();
-                        //Show Play again! button
+                        // Show Play again! button
                         $("#post_game").show();
-                        //Analyze score
                         
                         //Reset timer, scores turns, difficulty...
                         stopTimer(intervalObj);
@@ -87,30 +96,23 @@ $( document ).ready(function() {
                         turns = 5;
                 }
                 else {
+						// update turn and get a new color, let's play again
                         $("#turn").val(turn);
                         color_real=getRandomColor();
                         $( "span#randomcolor" ).html( color_real);
                         placeCircle(color_real, "circle_real");
                         $("#circle_guess").hide();
                 }
-                //Disable the Next! button
+                // Disable the Next! button
                 $("#submit_next[type='submit']").button("disable");
-                //Enable the Got it! button
+                // Enable the Got it! button
                 $("#submit_guess[type='submit']").button("enable");
         });
         
-        //Hide Play again!
+        // Hide Play again!
         $("#post_game").hide();
+		
         //Click event handler for "Play again!"
-
-  /*$("#again").click(function(e){
-                $("#game").show();
-                difficulty = prompt("Please enter difficulty from 0 to 10",5);
-                turns = prompt("Please enter number of turns",5);
-                startTimer();
-                $("#post_game").hide();
-        });*/
-
         $('#again').click(function(e) {
             location.reload();
         });
@@ -143,6 +145,7 @@ $.fn.hexed=function(settings)
         }, settings);
 }
 
+// place circle of given color in a given ID
 function placeCircle(color, circleID) {
         var circle=document.getElementById(circleID);
         var context=circle.getContext("2d");
@@ -152,23 +155,25 @@ function placeCircle(color, circleID) {
         context.stroke();
 }
 
+// generate a random color
 function getRandomColor() {
         var color = '#'+Math.floor(Math.random()*16777215).toString(16);
         return color;
 }
 
-//dec should be an integer
+// dec should be an integer
 function convertDecToHex(dec) {
         var hex = dec.toString(16);
         return hex;
 }
 
-//hex should be a string
+// hex should be a string
 function convertHexToDec(hex) {
         var dec = parseInt(hex,16);
         return dec;
 }
 
+// display information about the current turn
 function readUserInput(){
         var result_msg="";
         
@@ -190,6 +195,7 @@ function readUserInput(){
         alert(result_msg);
 }
 
+// start a new timer object
 function startTimer(){
         var start=new Date().getTime();
         var elapsed=0;
@@ -210,11 +216,17 @@ function startTimer(){
         return intervalObj;
 }
 
+// stop timer
 function stopTimer(intervalObj){
         window.clearInterval(intervalObj);
 }
-function isNumber(n) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); } 
 
+// debugging function to check if a variable is a number
+function isNumber(n) { 
+	return /^-?[\d.]+(?:e-?\d+)?$/.test(n); 
+} 
+
+// calculate percent off
 function percentOff(given, actual){
         var diff = given;
         diff = diff - actual;
@@ -225,7 +237,9 @@ function percentOff(given, actual){
         return fin;
 }
 
+// calculate score
 function newScore(poff, lev, time){
+		// changed certain parts of scoring to allow for more lenient and higher scores
         var s = 50;
         //Difficulty component
         s = s - lev;
@@ -239,6 +253,5 @@ function newScore(poff, lev, time){
         if(s<0){
                 s=0;
         }
-        
         return s;
 }
