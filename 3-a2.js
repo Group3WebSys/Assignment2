@@ -91,7 +91,7 @@ $( document ).ready(function() {
 	//Hide Play again!
 	$("#post_game").hide();
 	//Click event handler for "Play again!"
-<<<<<<< HEAD
+
   /*$("#again").click(function(e){
 		$("#game").show();
 		difficulty = prompt("Please enter difficulty from 0 to 10",5);
@@ -99,8 +99,7 @@ $( document ).ready(function() {
 		startTimer();
 		$("#post_game").hide();
 	});*/
-=======
->>>>>>> 2f94b7116ebbd859a2eb62bb3750c8a15945a755
+
 	$('#again').click(function(e) {
     	location.reload();
 	});
